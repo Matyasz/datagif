@@ -1,15 +1,22 @@
-import seaborn as sns
-import pandas as pd
+from typing import Dict
+
 import imageio
+import pandas as pd
+import seaborn as sns
 
 import matplotlib.pyplot as plt
 
 sns.set_style(style="darkgrid")
 
 
-def make_gif(save_dir: str, x: str, y: str, t: str, data,
-             fix_y: bool = False, fix_x: bool = False,
-             seaborn_args: dict = None, imageio_args: dict = None):
+def make_gif(save_dir: str,
+             x: str,
+             y: str,
+             t: str, data,
+             fix_y: bool = False,
+             fix_x: bool = False,
+             seaborn_args: Dict = None,
+             imageio_args: Dict = None):
     """ooh if x is the same as t. then make sure to fill full plot and only 
     add new data as you go, so they don't need to super duplicate their data
 
@@ -33,6 +40,7 @@ def make_gif(save_dir: str, x: str, y: str, t: str, data,
 
     time_values = sorted(data[t].unique().tolist())
 
+    saved_files = []
     for time in time_values:
         time_df = data.loc[data[t] == time]
 
@@ -51,9 +59,18 @@ def make_gif(save_dir: str, x: str, y: str, t: str, data,
         if fix_y:
             plt.ylim(data[y].min(), data[y].max())
 
-        plt.savefig(save_dir + f'{time}.png')
+        filename = save_dir + f'{time}.png'
+        saved_files.append(filename)
+
+        plt.savefig(filename)
 
     # plt.show()
+    with imageio.get_writer(f"{save_dir}GIF.gif", mode='I', duration=0.1) as writer:
+        for fn in saved_files:
+            image = imageio.imread(fn)
+            writer.append_data(image)
+
+        writer.close()
 
 
 def validate_inputs():
