@@ -7,22 +7,23 @@ import seaborn as sns
 
 import matplotlib.pyplot as plt
 
-# sns.set_style(style="darkgrid")
+from .utilities import get_imageio_defaults
 
 
-def make_gif(save_dir: str,
-             name: str,
-             data: pd.DataFrame,
-             x: str,
-             y: str,
-             t: str,
-             fix_x: bool = False,
-             fix_y: bool = False,
-             save_frames: bool = False,
-             seaborn_args: Dict = None,
-             imageio_args: Dict = None):
-    """ooh if x is the same as t. then make sure to fill full plot and only
-    add new data as you go, so they don't need to super duplicate their data
+def relplot_gif(save_dir: str,
+                name: str,
+                data: pd.DataFrame,
+                x: str,
+                y: str,
+                t: str,
+                fix_x: bool = False,
+                fix_y: bool = False,
+                save_frames: bool = False,
+                seaborn_args: Dict = None,
+                imageio_args: Dict = None):
+    """
+    Takes data in the form a pandas DataFrame, and turns the specified columns
+    into a gif of a seaborn relplot using given plot arguments.
 
     Arguments
     ---------
@@ -71,14 +72,6 @@ def make_gif(save_dir: str,
     for time in time_values:
         time_df = data.loc[data[t] == time]
 
-        # plot_args = {
-        #     'x': x,
-        #     'y': y,
-        #     'data': time_df,
-        #     **seaborn_args
-        # }
-
-        # sns.lmplot(**plot_args)
         sns.relplot(x=x, y=y, data=time_df, **seaborn_args)
 
         if fix_x:
@@ -89,13 +82,11 @@ def make_gif(save_dir: str,
         filename = f"{save_dir}/{name}_{time}.png"
         saved_files.append(filename)
 
+        plt.tight_layout()
         plt.savefig(filename)
 
     # Prepare the imageio arguments with some defaults
-    if 'duration' not in imageio_args:
-        imageio_args['duration'] = 0.1
-    if 'mode' not in imageio_args:
-        imageio_args['mode'] = 'I'
+    imageio_args = get_imageio_defaults(imageio_args)
 
     # Get the saved plots and combine them into a .gif
     with imageio.get_writer(
@@ -114,5 +105,15 @@ def make_gif(save_dir: str,
             Path(sf).unlink()
 
 
-def validate_inputs():
+def scatterplot_gif():
+    """
+
+    """
+    pass
+
+
+def lineplot_gif():
+    """
+
+    """
     pass

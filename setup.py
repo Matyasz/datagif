@@ -82,5 +82,8 @@ if __name__ == "__main__":
             "Topic :: Software Development :: Libraries"
         ],
 
-        keywords=['python', 'data', "science", 'data science', 'animated', 'gif']
+        keywords=[
+            'python', 'data', "science", 'data science', 'animated', 'gif',
+            'matplotlib', 'seaborn', 'imageio'
+        ]
     )
