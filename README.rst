@@ -10,3 +10,5 @@ of `seaborn <https://seaborn.pydata.org/>`_ to manage the plot generation, and
 Currently supported plot types:
 
 - `relplot`
+- `scatterplot`
+- `lineplot`

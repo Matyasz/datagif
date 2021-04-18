@@ -10,23 +10,34 @@ import matplotlib.pyplot as plt
 from .utilities import get_imageio_defaults
 
 
-def relplot_gif(save_dir: str,
-                name: str,
-                data: pd.DataFrame,
-                x: str,
-                y: str,
-                t: str,
-                fix_x: bool = False,
-                fix_y: bool = False,
-                save_frames: bool = False,
-                seaborn_args: Dict = None,
-                imageio_args: Dict = None):
+valid_relational_plots = [
+    'relplot', 'scatterplot', 'lineplot'
+]
+
+
+def _relational_plot(plot_type: str,
+                     save_dir: str,
+                     name: str,
+                     data: pd.DataFrame,
+                     x: str,
+                     y: str,
+                     t: str,
+                     fix_x: bool = False,
+                     fix_y: bool = False,
+                     save_frames: bool = False,
+                     seaborn_args: Dict = None,
+                     imageio_args: Dict = None):
     """
+    This is the worker method for creating the relational plot gifs.
+
     Takes data in the form a pandas DataFrame, and turns the specified columns
     into a gif of a seaborn relplot using given plot arguments.
 
     Arguments
     ---------
+    plot_type : str
+        The plotting method from seaborn to use.
+        Must be a valid relational plot.
     save_dir : str
         Directory in which to store outputs.
     name : str
@@ -58,6 +69,11 @@ def relplot_gif(save_dir: str,
         Any extra arguments to pass to imageio to customize the gif.
         Defaults to None.
     """
+    if plot_type not in valid_relational_plots:
+        raise ValueError(
+            f"Invalid relational plot. "
+            f"Must be one of {valid_relational_plots}"
+        )
 
     if seaborn_args is None:
         seaborn_args = {}
@@ -67,12 +83,14 @@ def relplot_gif(save_dir: str,
 
     time_values = sorted(data[t].unique().tolist())
 
+    plot = getattr(sns, plot_type)
+
     # Generate the individual frames of the .gif and save them
     saved_files = []
     for time in time_values:
         time_df = data.loc[data[t] == time]
 
-        sns.relplot(x=x, y=y, data=time_df, **seaborn_args)
+        plot(x=x, y=y, data=time_df, **seaborn_args)
 
         if fix_x:
             plt.xlim(data[x].min(), data[x].max())
@@ -84,6 +102,7 @@ def relplot_gif(save_dir: str,
 
         plt.tight_layout()
         plt.savefig(filename)
+        plt.close()
 
     # Prepare the imageio arguments with some defaults
     imageio_args = get_imageio_defaults(imageio_args)
@@ -105,15 +124,102 @@ def relplot_gif(save_dir: str,
             Path(sf).unlink()
 
 
-def scatterplot_gif():
+def relplot_gif(save_dir: str,
+                name: str,
+                data: pd.DataFrame,
+                x: str,
+                y: str,
+                t: str,
+                fix_x: bool = False,
+                fix_y: bool = False,
+                save_frames: bool = False,
+                seaborn_args: Dict = None,
+                imageio_args: Dict = None):
     """
+    The user-exposed method for making animated gifs of seaborn relplots.
+
+    Arguments
+    ---------
+    See the descriptions in the _relational_plots method.
 
     """
-    pass
+    _relational_plot(plot_type='relplot',
+                     save_dir=save_dir,
+                     name=name,
+                     data=data,
+                     x=x,
+                     y=y,
+                     t=t,
+                     fix_x=fix_x,
+                     fix_y=fix_y,
+                     save_frames=save_frames,
+                     seaborn_args=seaborn_args,
+                     imageio_args=imageio_args)
 
 
-def lineplot_gif():
+def scatterplot_gif(save_dir: str,
+                    name: str,
+                    data: pd.DataFrame,
+                    x: str,
+                    y: str,
+                    t: str,
+                    fix_x: bool = False,
+                    fix_y: bool = False,
+                    save_frames: bool = False,
+                    seaborn_args: Dict = None,
+                    imageio_args: Dict = None):
     """
+    The user-exposed method for making animated gifs of seaborn scatterplots.
+
+
+    Arguments
+    ---------
+    See the descriptions in the _relational_plots method.
 
     """
-    pass
+    _relational_plot(plot_type='scatterplot',
+                     save_dir=save_dir,
+                     name=name,
+                     data=data,
+                     x=x,
+                     y=y,
+                     t=t,
+                     fix_x=fix_x,
+                     fix_y=fix_y,
+                     save_frames=save_frames,
+                     seaborn_args=seaborn_args,
+                     imageio_args=imageio_args)
+
+
+def lineplot_gif(save_dir: str,
+                 name: str,
+                 data: pd.DataFrame,
+                 x: str,
+                 y: str,
+                 t: str,
+                 fix_x: bool = False,
+                 fix_y: bool = False,
+                 save_frames: bool = False,
+                 seaborn_args: Dict = None,
+                 imageio_args: Dict = None):
+    """
+    The user-exposed method for making animated gifs of seaborn lineplots.
+
+
+    Arguments
+    ---------
+    See the descriptions in the _relational_plots method.
+
+    """
+    _relational_plot(plot_type='lineplot',
+                     save_dir=save_dir,
+                     name=name,
+                     data=data,
+                     x=x,
+                     y=y,
+                     t=t,
+                     fix_x=fix_x,
+                     fix_y=fix_y,
+                     save_frames=save_frames,
+                     seaborn_args=seaborn_args,
+                     imageio_args=imageio_args)

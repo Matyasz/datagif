@@ -8,7 +8,7 @@ __title__ = "datagif"
 __summary__ = "Make animated gifs out of multiple data plots."
 __uri__ = "https://github.com/Matyasz/datagif"
 
-__version__ = "0.0.1"
+__version__ = "0.1.0"
 
 __license__ = "GNU GPLv3"
 
