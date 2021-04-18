@@ -4,6 +4,7 @@
     "python.linting.enabled": true,
     "restructuredtext.confPath": "",
     "cSpell.words": [
+        "funcs",
         "gifs"
     ]
 }

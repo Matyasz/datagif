@@ -25,6 +25,7 @@ def _relational_plot(plot_type: str,
                      fix_x: bool = False,
                      fix_y: bool = False,
                      save_frames: bool = False,
+                     seaborn_funcs: Dict = None,
                      seaborn_args: Dict = None,
                      imageio_args: Dict = None):
     """
@@ -100,7 +101,11 @@ def _relational_plot(plot_type: str,
         filename = f"{save_dir}/{name}_{time}.png"
         saved_files.append(filename)
 
-        plt.tight_layout()
+        # Call any extra desired plot methods
+        for f in seaborn_funcs:
+            exec(f"plt.{f}({seaborn_funcs[f]})")
+
+        # Save the image and close the plot
         plt.savefig(filename)
         plt.close()
 
@@ -133,6 +138,7 @@ def relplot_gif(save_dir: str,
                 fix_x: bool = False,
                 fix_y: bool = False,
                 save_frames: bool = False,
+                seaborn_funcs: Dict = None,
                 seaborn_args: Dict = None,
                 imageio_args: Dict = None):
     """
@@ -153,6 +159,7 @@ def relplot_gif(save_dir: str,
                      fix_x=fix_x,
                      fix_y=fix_y,
                      save_frames=save_frames,
+                     seaborn_funcs=seaborn_funcs,
                      seaborn_args=seaborn_args,
                      imageio_args=imageio_args)
 
@@ -166,6 +173,7 @@ def scatterplot_gif(save_dir: str,
                     fix_x: bool = False,
                     fix_y: bool = False,
                     save_frames: bool = False,
+                    seaborn_funcs: Dict = None,
                     seaborn_args: Dict = None,
                     imageio_args: Dict = None):
     """
@@ -187,6 +195,7 @@ def scatterplot_gif(save_dir: str,
                      fix_x=fix_x,
                      fix_y=fix_y,
                      save_frames=save_frames,
+                     seaborn_funcs=seaborn_funcs,
                      seaborn_args=seaborn_args,
                      imageio_args=imageio_args)
 
@@ -200,6 +209,7 @@ def lineplot_gif(save_dir: str,
                  fix_x: bool = False,
                  fix_y: bool = False,
                  save_frames: bool = False,
+                 seaborn_funcs: Dict = None,
                  seaborn_args: Dict = None,
                  imageio_args: Dict = None):
     """
@@ -221,5 +231,6 @@ def lineplot_gif(save_dir: str,
                      fix_x=fix_x,
                      fix_y=fix_y,
                      save_frames=save_frames,
+                     seaborn_funcs=seaborn_funcs,
                      seaborn_args=seaborn_args,
                      imageio_args=imageio_args)
