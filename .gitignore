@@ -8,7 +8,8 @@ __pycache__/
 
 # Local testing
 testing/
-te4sts/assets
+tests/assets
+examples/plots
 
 # Distribution / packaging
 .Python
