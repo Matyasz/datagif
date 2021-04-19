@@ -25,7 +25,7 @@ def _relational_plot(plot_type: str,
                      fix_x: bool = False,
                      fix_y: bool = False,
                      save_frames: bool = False,
-                     seaborn_funcs: Dict = None,
+                     plt_funcs: Dict[str, Dict] = None,
                      seaborn_args: Dict = None,
                      imageio_args: Dict = None):
     """
@@ -63,6 +63,11 @@ def _relational_plot(plot_type: str,
     save_frames : bool
         Whether or not to save the individual frames of the .gif in
         addition to the .gif itself.
+    plt_funcs : Dict[str, Dict], optional
+        Any extra methods of the plot that should be called, the name of the
+        method as a string for the key, and the value should be a dict
+        containint the arguments to provide the method. And empty dict or
+        None may be provided if no arguments are necessary.
     seaborn_args : Dict, optional
         Any extra arguments to pass to the seaborn plotting method to
         customize the plot. Defaults to None.
@@ -102,11 +107,11 @@ def _relational_plot(plot_type: str,
         saved_files.append(filename)
 
         # Call any extra desired plot methods
-        for f in seaborn_funcs:
+        for f in plt_funcs:
             plot_func = getattr(plt, f)
 
-            if seaborn_funcs[f] is not None:
-                plot_func(**seaborn_funcs[f])
+            if plt_funcs[f] is not None:
+                plot_func(**plt_funcs[f])
             else:
                 plot_func()
 
@@ -143,7 +148,7 @@ def relplot_gif(save_dir: str,
                 fix_x: bool = False,
                 fix_y: bool = False,
                 save_frames: bool = False,
-                seaborn_funcs: Dict = None,
+                plt_funcs: Dict[str, Dict] = None,
                 seaborn_args: Dict = None,
                 imageio_args: Dict = None):
     """
@@ -164,7 +169,7 @@ def relplot_gif(save_dir: str,
                      fix_x=fix_x,
                      fix_y=fix_y,
                      save_frames=save_frames,
-                     seaborn_funcs=seaborn_funcs,
+                     plt_funcs=plt_funcs,
                      seaborn_args=seaborn_args,
                      imageio_args=imageio_args)
 
@@ -178,7 +183,7 @@ def scatterplot_gif(save_dir: str,
                     fix_x: bool = False,
                     fix_y: bool = False,
                     save_frames: bool = False,
-                    seaborn_funcs: Dict = None,
+                    plt_funcs: Dict[str, Dict] = None,
                     seaborn_args: Dict = None,
                     imageio_args: Dict = None):
     """
@@ -200,7 +205,7 @@ def scatterplot_gif(save_dir: str,
                      fix_x=fix_x,
                      fix_y=fix_y,
                      save_frames=save_frames,
-                     seaborn_funcs=seaborn_funcs,
+                     plt_funcs=plt_funcs,
                      seaborn_args=seaborn_args,
                      imageio_args=imageio_args)
 
@@ -214,7 +219,7 @@ def lineplot_gif(save_dir: str,
                  fix_x: bool = False,
                  fix_y: bool = False,
                  save_frames: bool = False,
-                 seaborn_funcs: Dict = None,
+                 plt_funcs: Dict[str, Dict] = None,
                  seaborn_args: Dict = None,
                  imageio_args: Dict = None):
     """
@@ -236,6 +241,6 @@ def lineplot_gif(save_dir: str,
                      fix_x=fix_x,
                      fix_y=fix_y,
                      save_frames=save_frames,
-                     seaborn_funcs=seaborn_funcs,
+                     plt_funcs=plt_funcs,
                      seaborn_args=seaborn_args,
                      imageio_args=imageio_args)

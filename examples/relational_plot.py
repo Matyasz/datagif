@@ -36,7 +36,7 @@ relplot_gif(
     t='time',
     fix_x=True,
     fix_y=True,
-    seaborn_funcs={
+    plt_funcs={
         'tight_layout': None
     },
     seaborn_args={'clip_on': False},
@@ -52,7 +52,7 @@ scatterplot_gif(
     t='time',
     fix_x=True,
     fix_y=True,
-    seaborn_funcs={
+    plt_funcs={
         'tight_layout': None
     },
     seaborn_args={'clip_on': False},
@@ -68,7 +68,7 @@ lineplot_gif(
     t='time',
     fix_x=True,
     fix_y=True,
-    seaborn_funcs={
+    plt_funcs={
         'tight_layout': None
     },
     seaborn_args={},
