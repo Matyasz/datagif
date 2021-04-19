@@ -103,7 +103,12 @@ def _relational_plot(plot_type: str,
 
         # Call any extra desired plot methods
         for f in seaborn_funcs:
-            exec(f"plt.{f}({seaborn_funcs[f]})")
+            plot_func = getattr(plt, f)
+
+            if seaborn_funcs[f] is not None:
+                plot_func(**seaborn_funcs[f])
+            else:
+                plot_func()
 
         # Save the image and close the plot
         plt.savefig(filename)

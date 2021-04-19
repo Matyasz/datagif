@@ -37,7 +37,7 @@ relplot_gif(
     fix_x=True,
     fix_y=True,
     seaborn_funcs={
-        'tight_layout': ''
+        'tight_layout': None
     },
     seaborn_args={'clip_on': False},
     imageio_args={'duration': 0.1}
@@ -53,7 +53,7 @@ scatterplot_gif(
     fix_x=True,
     fix_y=True,
     seaborn_funcs={
-        'tight_layout': ''
+        'tight_layout': None
     },
     seaborn_args={'clip_on': False},
     imageio_args={'duration': 0.1}
@@ -69,7 +69,7 @@ lineplot_gif(
     fix_x=True,
     fix_y=True,
     seaborn_funcs={
-        'tight_layout': ''
+        'tight_layout': None
     },
     seaborn_args={},
     imageio_args={'duration': 0.1}
