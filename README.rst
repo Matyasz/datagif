@@ -46,7 +46,7 @@ Customizing your GIF
 There are four important arguments for customizing your GIF and the plots that make it up:
 
 - plt_funcs (Functions that are normally called like `plt.title()`)
-- seaborn_funcs (Functions that are normally called like 'sns.set_theme()')
+- seaborn_funcs (Functions that are normally called like `sns.set_theme()`)
 - seaborn_args (Arguments to add to the plot functions)
 - imageio_args (Arguments for the imageio `get_writer()` method)
 
@@ -71,4 +71,5 @@ these other arguments will be used for the n\ :sup:`th`\  plot.
 Helpful Tips
 ############
 It is strongly recommended to use the `tight_layout` method in the `plt_funcs` argument.
-This will help prevent small differences between the plots produced, leading to a much cleaner GIF.
+This will help prevent small differences between the plots produced, leading to a much
+cleaner GIF.
