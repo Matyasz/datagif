@@ -104,7 +104,11 @@ def datagif(plots: Union[List[str], str],
             plot_func = getattr(plt, f)
 
             if plt_funcs[f] is not None:
-                plot_func(**plt_funcs[f])
+                if isinstance(plt_funcs[f], dict) or \
+                   isinstance(plt_funcs[f], list):
+                    plot_func(**plt_funcs[f])
+                else:
+                    plot_func(plt_funcs[f])
             else:
                 plot_func()
 
