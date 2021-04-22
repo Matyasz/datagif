@@ -2,6 +2,12 @@
 datagif
 *******
 
+.. role:: pyt(code)
+   :language: python
+
+.. image:: https://badge.fury.io/py/datagif.svg
+    :target: https://badge.fury.io/py/datagif
+
 A Python package for easily making clean animated gifs of data plots, `datagif` is built on top
 of `seaborn <https://seaborn.pydata.org/>`_ to manage the plot generation, and
 `imageio <https://imageio.github.io/>`_ to manage creating the animated gif.
@@ -10,7 +16,7 @@ Example GIF
 ***********
 Code for this example can be found in the `examples directory <https://github.com/Matyasz/datagif/blob/master/examples/scatterplot.py>`_.
 
-.. image:: readme_assets/gaussian_scatter.gif
+.. image:: https://raw.githubusercontent.com/Matyasz/datagif/master/readme_assets/gaussian_scatter.gif
     :align: center
     :width: 500px
     :height: 500px
@@ -45,12 +51,12 @@ Customizing your GIF
 ####################
 There are four important arguments for customizing your GIF and the plots that make it up:
 
-- plt_funcs (Functions that are normally called like `plt.title()`)
-- seaborn_funcs (Functions that are normally called like `sns.set_theme()`)
-- seaborn_args (Arguments to add to the plot functions)
-- imageio_args (Arguments for the imageio `get_writer()` method)
+- :pyt:`plt_funcs` (Functions that are normally called like :pyt:`plt.title()`)
+- :pyt:`seaborn_funcs` (Functions that are normally called like :pyt:`sns.set_theme()`)
+- :pyt:`seaborn_args` (Arguments to add to the plot functions)
+- :pyt:`imageio_args` (Arguments for the imageio :pyt:`get_writer()` method)
 
-For the `_funcs` arguments, these should be in the form of a dict where the keys are strings of the
+For the ``_funcs`` arguments, these should be in the form of a dict where the keys are strings of the
 names of the functions you want to call, and the values should be the arguments you want to pass to
 the functions. These values can themselves be 
 
@@ -58,18 +64,18 @@ the functions. These values can themselves be
 - a list to be unpacked and passed to the function
 - a dictionary to be unpacked and passed to the function as keyword arguments
 
-For the `_args` arguments, these should be in the form of a dict that will be passed to the
+For the ``_args`` arguments, these should be in the form of a dict that will be passed to the
 plotting and imageio functions as keyword arguments.
 
 Using multiple plots in one GIF
 ###############################
 As in the example above, you can layer multiple plots in one GIF! To do this, simply make the
-`plots` argument a list of valid strings. Then also make the `x`, `y`, `seaborn_args` arguments
+``plots`` argument a list of valid strings. Then also make the ``x``, ``y``, ``seaborn_args`` arguments
 into lists of valid values the same length as the `plots` list, and the n\ :sup:`th`\  entry of
 these other arguments will be used for the n\ :sup:`th`\  plot.
 
 Helpful Tips
 ############
-It is strongly recommended to use the `tight_layout` method in the `plt_funcs` argument.
+It is strongly recommended to use the :pyt:`tight_layout` method in the :pyt:`plt_funcs` argument.
 This will help prevent small differences between the plots produced, leading to a much
 cleaner GIF.
