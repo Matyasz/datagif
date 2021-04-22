@@ -13,7 +13,7 @@ Example GIF
 ***********
 Code for this example can be found in the `examples directory <https://github.com/Matyasz/datagif/blob/master/examples/scatterplot.py>`_.
 
-.. image:: readme_assets/gaussian_scatter.gif
+.. image:: https://raw.githubusercontent.com/Matyasz/datagif/master/readme_assets/gaussian_scatter.gif
     :align: center
     :width: 500px
     :height: 500px
