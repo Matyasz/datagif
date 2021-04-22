@@ -39,7 +39,6 @@ datagif(
     fix_x=True,
     fix_y=True,
     plt_funcs={
-        'tight_layout': None,
         'subplots': {
             'figsize': (6, 6)
         },

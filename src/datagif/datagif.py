@@ -20,6 +20,7 @@ def datagif(plots: Union[List[str], str],
             fix_x: bool = False,
             fix_y: bool = False,
             save_frames: bool = False,
+            tight_layout: bool = True,
             plt_funcs: Dict[str, Dict] = None,
             seaborn_funcs: Dict = None,
             seaborn_args: Union[List[Dict], Dict] = None,
@@ -59,11 +60,19 @@ def datagif(plots: Union[List[str], str],
     save_frames : bool
         Whether or not to save the individual frames of the .gif in
         addition to the .gif itself.
+    tight_layout : bool
+        Whether or not to use the tight_layout method. This is highly
+        recommended, as it prevents small difference between the individual
+        plots that make up the gif leading to a much smoother animation.
+        As such, it defaults to true for a better user experience.
     plt_funcs : Dict[str, Dict], optional
         Any extra methods of the plot that should be called, the name of the
         method as a string for the key, and the value should be a dict
         containint the arguments to provide the method. And empty dict or
         None may be provided if no arguments are necessary.
+    seaborn_funcs : Dict, optional
+        Any extra methods that should be called by the seaborn package,
+        for example: sns.set_theme('dark')
     seaborn_args : Dict, optional
         Any extra arguments to pass to the seaborn plotting method to
         customize the plot. Defaults to None.
@@ -100,6 +109,9 @@ def datagif(plots: Union[List[str], str],
         time_df = data.loc[data[t] == time]
 
         # Call any extra desired plot methods
+        if tight_layout:
+            plt.tight_layout()
+
         for f in plt_funcs:
             plot_func = getattr(plt, f)
 
